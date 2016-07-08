@@ -13,7 +13,7 @@
 > **✔** Works with synchronous and asynchronous (through Meteor methods api) methods.  
 
 ``` bash
-meteor add svein-serrurier
+meteor add svein:serrurier
 ```
 
 ## &#x1f512; *`@cadenas`* decorator
@@ -259,7 +259,7 @@ _______________________________ SERRURIER PARANOID REPORT ______________________
         createdAt: new Date('2016-07-07T05:46:25.005Z'),
         ip: '127.0.0.1',
         geoInfo: 'localhost'
-        userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/50.0.2661.102 Chrome/50.0.2661.102 Safari/537.36',
+        userAgent: 'Mozilla/5.0 (X11; Linux x86_64) ...,
         securityContext: {
                 reason: 'User must be in  role : administrator, partition: GLOBAL',
                 exceptionId: 'cadenas:logged-user-in-role',
@@ -347,15 +347,16 @@ const MyException = Serrurier.createException( 'MyException' );
 const myCustomCadenas = new DefaultCadenas({
     name: 'myCustomCadenas',
     reason: '',
-    // [optional] The exception that will be thrown. Only reporters listening for this exception will be called upon assertion failures.
+    // [optional] The exception that will be thrown. Only reporters listening for this exception will be
+    // called upon assertion failures.
     // Default to SecurityException for 'DefaultCadenas' and ValidationException for 'MethodParamsCadenas'.
     // You shall use the utility function `Serrurier.createException` if you need to create your own.
     // They inherit Meteor.Error and can be thrown from server to client via callabcks.
     ExceptionClass: MyException
     doesAssertionFails: function( myArg ) {
         // Does it need to throw an exception ?
-        // Must NOT throw an error. Returns a non-empty string that will be appended to the `reason` context property when an error should be thrown
-        // else return false
+        // Must NOT throw an error. Returns a non-empty string that will be appended to the `reason` context
+        // property when an error should be thrown else return false
     },
     // The cadenas signature (i.e. `doesAssertionFails` signature)?
     // You must describe any parameter here to keep the API consistent.
