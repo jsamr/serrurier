@@ -104,7 +104,7 @@ meteor add svein:serrurier-cadenas-roles
 
 
 #### `@cadenas( 'userExists' )`
-> **asserts** that the first argument of the class instance method is a string corresponding to an existing user.
+> **asserts** that the first argument of the class instance method is a string corresponding to an existing user.  
 > **targets** `methods`  
 > **throws** `StateException`  
 > **params** none
@@ -125,13 +125,14 @@ meteor add svein:serrurier-cadenas-roles
 > ```  
 > **ℹ** Applies to `methods` only.  
 > **ℹ** Performs server-side only, you must provide a callback as last argument if you need the return value.  
-> This callback has the following signature : `callback( [ Error ] error, { * } result )`
+> **ℹ** This callback has the following signature : `callback( [ Error ] error, { * } result )`
+> **⚠** You must always open and close parenthesis when using decorators
 
 ```javascript
 // @locus client and server
 import { Serrurier, server } from 'meteor/svein:serrurier';
 
-//...
+//... inside a Serrurier.createClass `methods` field
     @server()
     aMethodThatMustExecuteOnServer() {
       console.info( "Look, I'm running on server only." );
