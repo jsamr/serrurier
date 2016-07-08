@@ -4,10 +4,11 @@
 # *Serrurier*, a declarative extension for methods access control in [jagi:astronomy](http://jagi.github.io/meteor-astronomy/) using decorators
 
 > **ℹ** *Serrurier* and *cadenas* are french words that stands respectively for *locksmith* and *padlock*.  
-> **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators.  
+> **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators called *`@cadenas`*.  
 > **✔** It integrates smoothly with [alanning:meteor-roles](https://github.com/alanning/meteor-roles).  
-> **✔** Allows to easely report suspect activity and model errors through [builtin or custom reporters](#reporters).
-> **✔** Works with synchronous and asynchronous (through Meteor methods api) methods.
+> **✔** Helps to abstract error management (user feedbacks, security reports) through [the flexible reporter API](#reporters).  
+> **✔** Allows to define [Astro methods that run on server](#server).  
+> **✔** Works with synchronous and asynchronous (through Meteor methods api) methods.  
 
 ``` bash
 meteor add svein-serrurier
@@ -116,6 +117,7 @@ meteor add svein:serrurier-cadenas-roles
 > **throws** `StateException`  
 > **params** none
 
+<a name='server'>
 ## *`@server`* decorator
 
 > ```
@@ -126,6 +128,7 @@ meteor add svein:serrurier-cadenas-roles
 > This callback has the following signature : `callback( [ Error ] error, { * } result )`
 
 ```javascript
+// @locus client and server
 import { Serrurier, server } from 'meteor/svein:serrurier';
 
 //...
@@ -171,10 +174,10 @@ if(!Meteor.isDevelopment) Serrurier.lock();
 ## reporters
 
 > **ℹ** A reporter is exactly like an event listener for errors.   
-> **ℹ** For each type of error, i.e. `SecurityException`, `StateException` and `ValidationException`, you can register a reporter.
-> **ℹ** You can create your own errors with `import { createSerrurierException } from 'meteor/svein:'`
-> **ℹ** By default, there is no reporting : the errors are just thrown up to the method call.
-> **ℹ** A reporter takes one `security_context` argument that holds several informations :
+> **ℹ** For each type of error, i.e. `SecurityException`, `StateException` and `ValidationException`, you can register a reporter.  
+> **ℹ** You can create your own errors with `import { createSerrurierException } from 'meteor/svein:'`  
+> **ℹ** By default, there is no reporting : the errors are just thrown up to the method call.  
+> **ℹ** A reporter takes one `security_context` argument that holds several informations :  
 >
 ``` javascript
 * @typedef {object} security_context
@@ -190,19 +193,21 @@ if(!Meteor.isDevelopment) Serrurier.lock();
 ```
 
 
-### to add one
+### add a reporter
 
 ``` javascript
-// @locus client, server
+// @locus client and/or server
 import { Serrurier, SecurityException } from 'meteor/svein:serrurier';
 
+// if you need a client-only or server-only reporter, just call this code from one or the other.
 Serrurier.registerReporter( SecurityException, function( context ) {
     console.info( context );
+
 });
 ```
 If you need a reporter that is executed on server, but listens to both client and server side errors, you need to use those utility functions :
 
-Server side :
+**Server side** :
 ```javascript
 // @locus server
 import { SecurityException, Serrurier } from 'meteor/svein:serrurier';
@@ -212,7 +217,7 @@ Serrurier.publishServerReporter( SecurityException, function ( context ) {
     console.warn( context );
 });
 ```
-Client side :
+**Client side** :
 ``` javascript
 // @locus client
 import { SecurityException, Serrurier } from 'meteor/svein:serrurier';
@@ -224,7 +229,7 @@ Serrurier.subscribeServerReporter( SecurityException );
 Suits nicely for Error logging and suspect activity logging, see the Paranoid reporter bellow.  
 
 ### &#x1f47b; Paranoid reporter
-This reporter listen for `SecurityException`s and log detailed information to the console.
+This reporter listen for `SecurityException`s on both client and server, and log detailed information **in the server** console.
 It also keep track of those reports for 2 months.
 
 ```
@@ -266,9 +271,10 @@ ________________________________________________________________________________
 ```
 
 You must import the package both on server and client.
-On the server, you must call `config` once :
+On the **server**, you must call `config` once :
 
 ``` javascript
+// @locus server
 import {
   config,
   ONE_DAY,
@@ -291,6 +297,7 @@ config({
 ### Composition with `Cadenas.partialFrom`
 
 ``` javascript
+// @locus client and server
 import { Cadenas } from 'meteor/svein:serrurier';
 import { Match } from 'meteor/check';
 /**
@@ -315,6 +322,7 @@ methodThatMustBeRunByAdmin() {
 ### From scratch
 
 ```javascript
+// @locus client, server
 import { DefaultCadenas, Serrurier } from 'meteor/svein:serrurier';
 
 // You can also use builtin exception like ValidationException, SecurityException and StateException
@@ -326,7 +334,7 @@ const myCustomCadenas = new DefaultCadenas({
     // [optional] The exception that will be thrown. Only reporters listening for this exception will be called upon assertion failures.
     // Default to SecurityException for 'DefaultCadenas' and ValidationException for 'MethodParamsCadenas'.
     // You shall use the utility function `Serrurier.createException` if you need to create your own.
-    // They inherit Meteor.Error and can be thrown from server to client via callabcks. 
+    // They inherit Meteor.Error and can be thrown from server to client via callabcks.
     ExceptionClass: MyException
     doesAssertionFails: function( myArg ) {
         // Does it need to throw an exception ?
@@ -341,4 +349,11 @@ const myCustomCadenas = new DefaultCadenas({
     dependingCadenas: { userIsLoggedIn: [] }
 
 });
+```
+
+## Run tests
+
+Inside the *packages/serrurier* folder :
+```
+meteor test-packages ./ --driver-package practicalmeteor:mocha -p 3001
 ```

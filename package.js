@@ -25,9 +25,10 @@ Package.onTest(  function(api) {
     api.use( coreDependencies );
     api.use( [
         'practicalmeteor:mocha',
-        'practicalmeteor:chai'
+        'practicalmeteor:chai',
+        'lmieulet:meteor-coverage@0.8.0'
     ] );
-    api.mainModule( 'unit-tests.js' );
+    api.mainModule( 'all.tests.js' );
 });
 
 Package.onUse( function( api ) {
