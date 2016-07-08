@@ -3,6 +3,8 @@
 
 # *Serrurier*, a declarative extension for methods access control in [jagi:astronomy](http://jagi.github.io/meteor-astronomy/) using decorators
 
+![](img/decorator-raw.svg)
+
 > **ℹ** *Serrurier* and *cadenas* are french words that stands respectively for *locksmith* and *padlock*.  
 > **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators called *`@cadenas`*.  
 > **✔** It integrates smoothly with [alanning:meteor-roles](https://github.com/alanning/meteor-roles).  
@@ -21,12 +23,12 @@ meteor add svein-serrurier
 > **ℹ** This (or those) assertions are run both **client** side and **server** side.  
 > **ℹ** Those Exceptions are handled [by reporters](#reporters).  
 > **ℹ**  The general syntax for *`@cadenas`* is `@cadenas( cadenasName, ...params )`  
-> **ℹ** *`@cadenas`*  can target any function inside a `methods` description block.
+> **ℹ** *`@cadenas`*  can target any function inside a `methods` description block.  
 > **ℹ** *`@cadenas`* can target any `events` handlers but **not in an array of handlers**. On any `Error` thrown by a cadenas, `e.preventDefault()` will be called.  
-> **ℹ** It supports callbacks for `methods`.
+> **ℹ** It supports callbacks for `methods`.  
 > **ℹ** *Serrurier* is a very modular library and you can easely write your own *`@cadenas`* [within few lines of codes](#write-cadenas).   
-> **⚠** To use decorators in your meteor project `@`), [follow those 2 straightforward steps](#decorators).  
-> **⚠** To use `loggedUserInRole` *`@cadenas`*, you need to add `svein:serrurier-cadenas-roles` to your project.
+> **⚠** To use decorators in your meteor project (`@`), [follow those 2 straightforward steps](#decorators).  
+> **⚠** To use `loggedUserInRole` *`@cadenas`* for alanning:meteor-roles, you need to add `svein:serrurier-cadenas-roles` to your project.
 > ```
 > meteor add svein:serrurier-cadenas-roles
 > ```
@@ -57,6 +59,19 @@ This will output in the console ( if `Serrurier.lock()` has not been called ) :
 
 Notice that the cadenas `'userIsLoggedIn'` has passed, because `'loggedUserInRole'` cadenas depends on it.
 
+### Stacking *`@cadenas`*
+
+The order you declare your cadenas is the order they will be applied.
+
+``` javascript
+@persisted()
+@userLoggedIn()
+aMethod() {
+  // ...
+}
+```
+Serrurier will first check if the astro instance has been persisted, then it will check if user is logged in.
+
 ### List of available *`@cadenas`*
 
 If you want, and you should, write your own cadenas, [go to this section](#write-cadenas).
@@ -76,7 +91,7 @@ If you want, and you should, write your own cadenas, [go to this section](#write
 meteor add svein:serrurier-cadenas-roles
 ```
 
-> **asserts** that the logged user has role(s) in a specific scope (partition).
+> **asserts** that the logged user has role(s) in a specific scope (partition).  
 > **targets** `methods`, `events`  
 > **throws** `SecurityException`  
 > **depends** on `'userLoggedIn'` (will always check that user is logged in first)  
@@ -96,7 +111,7 @@ meteor add svein:serrurier-cadenas-roles
 
 #### `@cadenas( 'matchParams', paramsDescription )`
 
-> **asserts** that all method arguments match the given paramsDescription.
+> **asserts** that all method arguments match the given paramsDescription.  
 > **targets** `methods`  
 > **throws** `ValidationException`  
 > **params**  
@@ -176,7 +191,7 @@ if(!Meteor.isDevelopment) Serrurier.lock();
 
 > **ℹ** A reporter is exactly like an event listener for errors.   
 > **ℹ** For each type of error, i.e. `SecurityException`, `StateException` and `ValidationException`, you can register a reporter.  
-> **ℹ** You can create your own errors with `import { createSerrurierException } from 'meteor/svein:'`  
+> **ℹ** You can create your own errors with `Serrurier.createException`.  
 > **ℹ** By default, there is no reporting : the errors are just thrown up to the method call.  
 > **ℹ** A reporter takes one `security_context` argument that holds several informations :  
 >
@@ -203,7 +218,7 @@ import { Serrurier, SecurityException } from 'meteor/svein:serrurier';
 // if you need a client-only or server-only reporter, just call this code from one or the other.
 Serrurier.registerReporter( SecurityException, function( context ) {
     console.info( context );
-
+    // ...
 });
 ```
 If you need a reporter that is executed on server, but listens to both client and server side errors, you need to use those utility functions :

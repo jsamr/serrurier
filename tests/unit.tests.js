@@ -1,11 +1,11 @@
-import { Assertion } from './lib/api/Assertion'
-import SecurityException from './lib/SecurityException';
-import ValidationException from './lib/ValidationException';
-import MethodParamsAssertion from './lib/api/MethodParamsAssertion';
-import DefaultAssertion from './lib/api/DefaultAssertion';
-import MethodParamsCadenas from './lib/api/MethodParamsCadenas';
-import DefaultCadenas from './lib/api/DefaultCadenas';
-import cadenas from './lib/cadenas-decorator';
+import { Assertion } from './../lib/api/Assertion'
+import SecurityException from './../lib/SecurityException';
+import ValidationException from './../lib/ValidationException';
+import MethodParamsAssertion from './../lib/api/MethodParamsAssertion';
+import DefaultAssertion from './../lib/api/DefaultAssertion';
+import MethodParamsCadenas from './../lib/api/MethodParamsCadenas';
+import DefaultCadenas from './../lib/api/DefaultCadenas';
+import cadenas from './../lib/cadenas-decorator';
 import { decoratorMock } from 'meteor/svein:serrurier-decorators-core/lib/utils';
 import _ from 'lodash';
 import { chai } from 'meteor/practicalmeteor:chai';
@@ -133,7 +133,7 @@ describe('svein:serrurier', function() {
                 }).to.throw( ValidationException );
             });
 
-            it('should not throw an error of type `ValidationException` when the bound assertion passes ', function () {
+            it('should not throw an error of type `SecurityException` when the bound assertion passes ', function () {
                 expect(function () {
                     // must passes because the first argument is a string
                     targetCandidate.someMethod( 'methodArgument1' );
@@ -143,7 +143,7 @@ describe('svein:serrurier', function() {
 
     });
     describe('a method decorated with multiple `cadenas`s', function () {
-        it('should apply all those cadenas', function () {
+        it('should apply all those assertions', function () {
             let targetCandidate1 = {
                 someMethod: function () {}
             };
