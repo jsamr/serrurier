@@ -7,7 +7,6 @@ import MethodParamsCadenas from './lib/api/MethodParamsCadenas';
 import DefaultCadenas from './lib/api/DefaultCadenas';
 import cadenas from './lib/cadenas-decorator';
 import { decoratorMock } from 'meteor/svein:serrurier-core/lib/utils';
-import _ from 'lodash';
 import { chai } from 'meteor/practicalmeteor:chai';
 
 const expect = chai.expect;
@@ -27,19 +26,19 @@ const alwaysPassing = {
     },
     reason: 'I always pass.'
 };
-const alwaysFailingDefaultCadenas = new DefaultCadenas( _.extend({
+const alwaysFailingDefaultCadenas = new DefaultCadenas( Object.assign({
         name: 'alwaysFailingDefaultCadenas'
     }, alwaysFailing )
 );
-const alwaysPassingDefaultCadenas = new DefaultCadenas( _.extend({
+const alwaysPassingDefaultCadenas = new DefaultCadenas( Object.assign({
         name: 'alwaysPassingDefaultCadenas'
     }, alwaysPassing )
 );
-const alwaysFailingMethodParamsAssertor = new MethodParamsCadenas( _.extend({
+const alwaysFailingMethodParamsAssertor = new MethodParamsCadenas( Object.assign({
         name: 'alwaysFailingMethodParamsAssertor'
     }, alwaysFailing )
 );
-const alwaysPassingMethodParamsAssertor = new MethodParamsCadenas( _.extend({
+const alwaysPassingMethodParamsAssertor = new MethodParamsCadenas( Object.assign({
         name: 'alwaysPassingMethodParamsAssertor'
     }, alwaysPassing )
 );

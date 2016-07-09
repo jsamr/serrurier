@@ -8,7 +8,6 @@ import {
 } from 'meteor/svein:serrurier-core';
 import { decoratorMock } from 'meteor/svein:serrurier-core/lib/utils';
 import { chai } from 'meteor/practicalmeteor:chai';
-import _ from 'lodash';
 const expect = chai.expect;
 Logger.silence();
 

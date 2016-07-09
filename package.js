@@ -5,10 +5,6 @@ var coreDependencies = [
     'jagi:astronomy@2.0.0'
 ];
 
-Npm.depends({
-    lodash: '4.11.1'
-});
-
 Package.describe({
     name: 'svein:serrurier',
     version: '1.0.0',
