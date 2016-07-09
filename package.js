@@ -1,7 +1,7 @@
 var coreDependencies = [
     'ecmascript',
     'check',
-    'svein:serrurier-decorators-core@1.0.0',
+    'svein:serrurier-core@1.0.0',
     'jagi:astronomy@2.0.0'
 ];
 

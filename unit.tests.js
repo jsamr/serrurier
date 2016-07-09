@@ -6,7 +6,7 @@ import DefaultAssertion from './lib/api/DefaultAssertion';
 import MethodParamsCadenas from './lib/api/MethodParamsCadenas';
 import DefaultCadenas from './lib/api/DefaultCadenas';
 import cadenas from './lib/cadenas-decorator';
-import { decoratorMock } from 'meteor/svein:serrurier-decorators-core/lib/utils';
+import { decoratorMock } from 'meteor/svein:serrurier-core/lib/utils';
 import _ from 'lodash';
 import { chai } from 'meteor/practicalmeteor:chai';
 

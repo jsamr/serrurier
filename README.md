@@ -4,6 +4,7 @@
 # *Serrurier*, a declarative extension for methods access control in [jagi:astronomy](http://jagi.github.io/meteor-astronomy/) using decorators
 
 ![](https://cdn.rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)
+![](https://img.shields.io/github/license/mashape/apistatus.svg)
 
 > **ℹ** *Serrurier* and *cadenas* are french words that stands respectively for *locksmith* and *padlock*.  
 > **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators called *`@cadenas`*.  
@@ -346,10 +347,11 @@ const MyException = Serrurier.createException( 'MyException' );
 
 const myCustomCadenas = new DefaultCadenas({
     name: 'myCustomCadenas',
-    reason: '',
+    // What is at stake?
+    reason: 'Something to describe the error.',
     // [optional] The exception that will be thrown. Only reporters listening for this exception will be
     // called upon assertion failures.
-    // Default to SecurityException for 'DefaultCadenas' and ValidationException for 'MethodParamsCadenas'.
+    // Default to SecurityException for 'DefaultCadenas' and ValidationException for 'MethodParamsCadenas'
     // You shall use the utility function `Serrurier.createException` if you need to create your own.
     // They inherit Meteor.Error and can be thrown from server to client via callabcks.
     ExceptionClass: MyException
@@ -362,7 +364,8 @@ const myCustomCadenas = new DefaultCadenas({
     // You must describe any parameter here to keep the API consistent.
     // Use Match.Any if you don't want to test an input, however this is not recommanded.
     matchPatterns: [ Match.Optional( String ) ],
-    // [optional] A set of depending assertions in the form of a dictionary which keys are cadenas names, and values an array with their `doesAssertionFails` params.
+    // [optional] A set of depending assertions in the form of a dictionary which keys are cadenas names,
+    // and values an array with their `doesAssertionFails` params.
     dependingCadenas: { userIsLoggedIn: [] }
 
 });

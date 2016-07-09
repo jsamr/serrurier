@@ -5,14 +5,14 @@ import {
     ActionsStore,
     Logger,
     registerReporter
-} from 'meteor/svein:serrurier-decorators-core';
-import { decoratorMock } from 'meteor/svein:serrurier-decorators-core/lib/utils';
+} from 'meteor/svein:serrurier-core';
+import { decoratorMock } from 'meteor/svein:serrurier-core/lib/utils';
 import { chai } from 'meteor/practicalmeteor:chai';
 import _ from 'lodash';
 const expect = chai.expect;
 Logger.silence();
 
-describe( 'svein:serrurier-decorators-core with svein:serrurier', function() {
+describe( 'svein:serrurier-core with svein:serrurier', function() {
     let securityContext = { reason:'', exceptionId:'any-kind-of-error' };
     describe( 'when the `decorateDescription` function is applied to an Astro description `object`', function() {
 
