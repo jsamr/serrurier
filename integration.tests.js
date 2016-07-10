@@ -1,12 +1,13 @@
-import cadenas from './lib/cadenas-decorator';
 import SecurityException from './lib/SecurityException';
+import { Serrurier, server, cadenas } from './lib/main';
+import { ValidationError } from 'meteor/mdg:validation-error';
 import {
     decorateDescription,
     ActionsStore,
     Logger,
-    registerReporter
+    registerIsolatedReporter
 } from 'meteor/svein:serrurier-core';
-import { decoratorMock } from 'meteor/svein:serrurier-core/lib/utils';
+import { decoratorMock, once } from 'meteor/svein:serrurier-core/lib/utils';
 import { chai } from 'meteor/practicalmeteor:chai';
 const expect = chai.expect;
 Logger.silence();
@@ -14,45 +15,41 @@ Logger.silence();
 describe( 'svein:serrurier-core with svein:serrurier', function() {
     let securityContext = { reason:'', exceptionId:'any-kind-of-error' };
     describe( 'when the `decorateDescription` function is applied to an Astro description `object`', function() {
-
         let description1,
-            description2;
-
-        before( function(){
-            registerReporter( SecurityException, function() {
-               //
-            });
-            description1 = decorateDescription({
-                name: 'MyAstroClass1',
-                events: {
-                    eventA: function() {
-                        throw new SecurityException( securityContext );
+            description2,
+            onceBefore = once( function(){
+                registerIsolatedReporter( SecurityException, function() {
+                    console.info('SecurityException reporter is being called.');
+                });
+                description1 = decorateDescription({
+                    name: 'MyAstroClass1',
+                    events: {
+                        eventA: function() {
+                            throw new SecurityException( securityContext );
+                        }
+                    },
+                    methods: {
+                        methodA: function() {
+                            throw new SecurityException( securityContext );
+                        }
                     }
-                },
-                methods: {
-                    methodA: function() {
-                        throw new SecurityException( securityContext );
+                });
+                description2 = decorateDescription({
+                    name: 'MyAstroClass2',
+                    events: {
+                        eventA: [
+                            function() { throw new Error();},
+                            function() {}
+                        ]
+                    },
+                    methods: {
+                        methodA: function() {
+                            throw new Error();
+                        }
                     }
-                }
+                });
             });
-            description2 = decorateDescription({
-                name: 'MyAstroClass2',
-                events: {
-                    eventA: [
-                        function() { throw new Error();},
-                        function() {}
-                    ]
-                },
-                methods: {
-                    methodA: function() {
-                        throw new Error();
-                    }
-                }
-            });
-        });
-        after( function(){
-            ActionsStore.clear();
-        });
+        before( onceBefore );
         describe( 'any wrapped method called `methodName` when a reporter listen to `SecurityException`', function() {
             it( 'should have the "isSecured" property set in the store', function() {
                 expect( ActionsStore.getProp( description1.methods.methodA, 'isSecured' ) ).to.be.true;
@@ -95,5 +92,39 @@ describe( 'svein:serrurier-core with svein:serrurier', function() {
             });
         });
 
+    });
+});
+
+describe( 'svein:serrurier with mdg:validation-error', function() {
+    describe( 'calling a server decorated method throwing a ValidationError', function() {
+        let MyClass;
+        const onceBefore = once( function() {
+            function thrower(){
+                throw new ValidationError([
+                    {
+                        name: 'cost',
+                        type: 'out-of-range',
+                        value: 1456,
+                        min: 0,
+                        max: 100
+                    }
+                ]);
+            }
+            const description = {
+                name: 'AClassThatShouldGoAlongWithValidationError',
+                methods: {
+                    methodA: thrower
+                }
+            };
+            decoratorMock( description.methods, 'methodA', server());
+            MyClass = Serrurier.createClass( description );
+        });
+        before( onceBefore );
+        it( 'should be passed to the given callback', function() {
+            (new MyClass).methodA( function( err ) {
+                expect(ValidationError.is(err)).to.be.true ;
+            });
+
+        });
     });
 });
