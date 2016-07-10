@@ -460,6 +460,12 @@ const myCustomCadenas = new DefaultCadenas({
 ## Run tests
 
 Inside the *packages/serrurier* folder :
+
+**console**
 ```
-meteor test-packages ./ --driver-package practicalmeteor:mocha -p 3001
+meteor npm test
+```
+**web**
+```
+meteor npm run-script test:practical
 ```
