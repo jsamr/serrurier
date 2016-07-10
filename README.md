@@ -1,10 +1,10 @@
 <a name="head">
-![](https://rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)
+![](https://cdn.rawgit.com/sveinburne/serrurier/master/img/serrurier-raw.svg)
 
 # *Serrurier*, a declarative extension for methods access control in [jagi:astronomy](http://jagi.github.io/meteor-astronomy/)(v2) using decorators
 ![](https://img.shields.io/github/license/mashape/apistatus.svg)  
 
-> ![](https://cdn.rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)
+> ![](https://rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)
 
 > **ℹ** *Serrurier* and *cadenas* are french words that stands respectively for *locksmith* and *padlock*.  
 > **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators called *`@cadenas`*.  
