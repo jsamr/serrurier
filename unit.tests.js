@@ -6,25 +6,27 @@ import DefaultAssertion from './lib/api/DefaultAssertion';
 import MethodParamsCadenas from './lib/api/MethodParamsCadenas';
 import DefaultCadenas from './lib/api/DefaultCadenas';
 import cadenas from './lib/cadenas-decorator';
-import { decoratorMock } from 'meteor/svein:serrurier-core/lib/utils';
+import server from './lib/server-decorator';
+import { decoratorMock, once } from 'meteor/svein:serrurier-core/lib/utils';
 import { chai } from 'meteor/practicalmeteor:chai';
+import { Serrurier } from './lib/main';
 
 const expect = chai.expect;
 const getMethodName = () => 'methodName';
 const verboseReason = 'This is some verbose reason justifying why the assertion failed';
 
+Serrurier.silence();
+
 const alwaysFailing = {
-    doesAssertionFails: (arg1) => {
-        return arg1;
+    doesAssertionFails: () => {
+        return verboseReason;
     },
-    reason: 'I always fail.',
     matchPatterns: [ String ]
 };
 const alwaysPassing = {
     doesAssertionFails: () => {
         return null;
-    },
-    reason: 'I always pass.'
+    }
 };
 const alwaysFailingDefaultCadenas = new DefaultCadenas( Object.assign({
         name: 'alwaysFailingDefaultCadenas'
@@ -120,19 +122,19 @@ describe('svein:serrurier', function() {
                 }).to.throw( SecurityException );
             });
         });
-        describe('describing a `MethodParamsAssertor` instance', function () {
+        describe( 'describing a `MethodParamsAssertor` instance', function () {
             let targetCandidate = {
                 someMethod: function () { }
             };
             decoratorMock( targetCandidate, 'someMethod', cadenas( 'methodArgMustBeAStringAssertor' ));
-            it('should throw an error of type `ValidationException` when the bound assertion fails ', function () {
+            it( 'should throw an error of type `ValidationException` when the bound assertion fails ', function () {
                 expect(function () {
                     // must fail because the first argument is not a string
                     targetCandidate.someMethod( {} );
                 }).to.throw( ValidationException );
             });
 
-            it('should not throw an error of type `ValidationException` when the bound assertion passes ', function () {
+            it( 'should not throw an error of type `ValidationException` when the bound assertion passes ', function () {
                 expect(function () {
                     // must passes because the first argument is a string
                     targetCandidate.someMethod( 'methodArgument1' );
@@ -141,8 +143,67 @@ describe('svein:serrurier', function() {
         });
 
     });
-    describe('a method decorated with multiple `cadenas`s', function () {
-        it('should apply all those cadenas', function () {
+
+    describe( 'an async callback as the last argument of an astro method decorated with a cadenas', function() {
+        describe( 'throwing an unregistered exception', function() {
+            const thrown = new Meteor.Error( 'SomeException.someDetails', null ) ;
+            const old = function () { throw thrown; };
+            let MyClass;
+            let createClass = once( function() {
+                console.info( 'CREATING CLASS DummyClass1' )
+                let astroClassCandidate = {
+                    name: 'DummyClass1',
+                    methods: {
+                        someMethod1: old
+                    }
+
+                };
+                decoratorMock( astroClassCandidate.methods, 'someMethod1', server());
+                decoratorMock( astroClassCandidate.methods, 'someMethod1', cadenas( 'alwaysPassingDefaultCadenas', 'assertion argument 1' ));
+                MyClass = Serrurier.createClass( astroClassCandidate );
+            });
+            before( createClass );
+            it( 'should receive the exception as first argument', function() {
+                (new MyClass()).someMethod1( function( err ) {
+                    if(Meteor.isClient){
+                        console.info(err);
+                        expect( err ).to.have.property( 'error' ).equal( 'SomeException.someDetails' );
+                        expect( err ).to.have.property( 'reason' ).equal( null );
+                    } else {
+                        expect( err ).to.equal( thrown );
+                    }
+                });
+            });
+
+        });
+        describe( 'throwing a registered exception', function() {
+            let MyClas;
+            let createClass = once( function() {
+                let astroClassCandidate = {
+                    name: 'DummyClass2',
+                    methods: {
+                        someMethod2: function () { }
+                    }
+                };
+                decoratorMock( astroClassCandidate.methods, 'someMethod2', server());
+                decoratorMock( astroClassCandidate.methods, 'someMethod2', cadenas( 'alwaysFailingDefaultCadenas', 'assertion argument 1' ));
+                MyClass = Serrurier.createClass( astroClassCandidate );
+            });
+            before( createClass );
+            it( 'should receive the exception as first argument', function() {
+                (new MyClass()).someMethod2( function( err ) {
+                    if(Meteor.isClient){
+                        expect( err ).to.have.property( 'error' ).equal( 'SecurityException.alwaysFailingDefaultCadenas' );
+                        expect( err ).to.have.property( 'reason' ).equal( verboseReason );
+                    } else {
+                        expect( err ).to.be.instanceof( SecurityException );
+                    }
+                });
+            });
+        });
+    });
+    describe( 'a method decorated with multiple `cadenas`s', function () {
+        it( 'should apply all those cadenas', function () {
             let targetCandidate1 = {
                 someMethod: function () {}
             };
