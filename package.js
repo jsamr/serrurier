@@ -20,6 +20,7 @@ Package.describe({
 Package.onTest(  function(api) {
     api.use( coreDependencies );
     api.use( [
+        'mdg:validation-error@0.5.1',
         'practicalmeteor:mocha',
         'practicalmeteor:chai',
         'lmieulet:meteor-coverage@0.8.0'
