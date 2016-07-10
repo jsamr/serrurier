@@ -18,6 +18,34 @@
 meteor add svein:serrurier
 ```
 
+Table of Contents
+=================
+
+* [<g-emoji alias="lock" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f512.png">🔒</g-emoji> <em>@cadenas</em> decorator](#-cadenas-decorator)
+  * [Basics](#basics)
+  * [Stacking <em>@cadenas</em>](#stacking-cadenas)
+  * [Default <em>@cadenas</em>](#default-cadenas)
+    * [@cadenas( 'userIsLoggedIn' )](#cadenas-userisloggedin-)
+    * [@cadenas( 'matchParams', paramsDescription )](#cadenas-matchparams-paramsdescription-)
+    * [@cadenas( 'userExists' )](#cadenas-userexists-)
+    * [@cadenas( 'persisted' )](#cadenas-persisted-)
+  * [Alanning meteor roles <em>@cadenas</em>](#alanning-meteor-roles-cadenas)
+    * [@cadenas( 'loggedUserInRole', role_s, partition )](#cadenas-loggeduserinrole-role_s-partition-)
+* [<em>@server</em> decorator](#server-decorator)
+  * [Exemple with ValidationError](#exemple-with-validationerror)
+* [Adding legacy decorations (Meteor &gt;= 1.3.4)](#adding-legacy-decorations-meteor--134)
+* [Security in production](#security-in-production)
+* [Reporters](#reporters)
+  * [Defining reporters](#defining-reporters)
+    * [Isolated reporter](#isolated-reporter)
+    * [Server side reporter](#server-side-reporter)
+  * [<g-emoji alias="ghost" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f47b.png">👻</g-emoji> Paranoid reporter](#-paranoid-reporter)
+* [Write your own <em>@cadenas</em>](#write-your-own-cadenas)
+  * [Composition with Cadenas.partialFrom](#composition-with-cadenaspartialfrom)
+  * [From scratch](#from-scratch)
+* [Run tests](#run-tests)
+
+
 ## &#x1f512; *`@cadenas`* decorator
 ### Basics
 
