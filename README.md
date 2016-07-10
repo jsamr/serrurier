@@ -2,7 +2,6 @@
 ![](https://cdn.rawgit.com/sveinburne/serrurier/master/img/serrurier-raw.svg)
 
 # *Serrurier*, a declarative extension for methods access control in [jagi:astronomy](http://jagi.github.io/meteor-astronomy/)(v2) using decorators
-![](https://img.shields.io/github/license/mashape/apistatus.svg)  
 
 > ![](https://rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)
 
@@ -12,7 +11,9 @@
 > **✔** Helps to abstract error management (user feedbacks, security reports) through [the flexible reporter API](#reporters).  
 > **✔** Allows to define [Astro methods that run on server](#server).  
 > **✔** Works with synchronous and asynchronous (through Meteor methods api) methods.  
-> **✔** Compatible with [ValidationErrors](https://atmospherejs.com/mdg/validation-error#validationerror)
+> **✔** Compatible with [ValidationErrors](https://atmospherejs.com/mdg/validation-error#validationerror)  
+> **✔** ![](https://img.shields.io/github/license/mashape/apistatus.svg)  
+
 
 ``` bash
 meteor add svein:serrurier
