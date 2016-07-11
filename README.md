@@ -12,7 +12,7 @@
 > **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators called *`@cadenas`*.  
 > **✔** It integrates smoothly with [alanning:meteor-roles](https://github.com/alanning/meteor-roles).  
 > **✔** Helps to abstract error management (user feedbacks, security reports) through [the flexible reporter API](#reporters).  
-> **✔** Allows to define [Astro methods that run on server](#server).  
+> **✔** Allows to define [Astro methods that remote-call on server](#server).  
 > **✔** Works with synchronous and asynchronous (through Meteor methods api) methods.  
 > **✔** Compatible with [ValidationErrors](https://atmospherejs.com/mdg/validation-error#validationerror).  
 > **⚠** To use es7 feature candidate **decorator**s in your meteor project (`@`), you need to [follow those 2 straightforward steps](#decorators).  
