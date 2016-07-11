@@ -14,7 +14,8 @@
 > **✔** Helps to abstract error management (user feedbacks, security reports) through [the flexible reporter API](#reporters).  
 > **✔** Allows to define [Astro methods that run on server](#server).  
 > **✔** Works with synchronous and asynchronous (through Meteor methods api) methods.  
-> **✔** Compatible with [ValidationErrors](https://atmospherejs.com/mdg/validation-error#validationerror)  
+> **✔** Compatible with [ValidationErrors](https://atmospherejs.com/mdg/validation-error#validationerror).  
+> **⚠** To use es7 feature candidate **decorator**s in your meteor project (`@`), you need to [follow those 2 straightforward steps](#decorators).  
 
 
 
@@ -61,7 +62,6 @@ Table of Contents
 > **ℹ** *`@cadenas`* can target any `events` handlers but **not in an array of handlers**. On any `Error` thrown by a cadenas, `e.preventDefault()` will be called.  
 > **ℹ** It supports callbacks for `methods`.  
 > **ℹ** *Serrurier* is a very modular library and you can easely write your own *`@cadenas`* [within few lines of codes](#write-cadenas).   
-> **⚠** To use decorators in your meteor project (`@`), [follow those 2 straightforward steps](#decorators).  
 > **⚠** To use `loggedUserInRole` *`@cadenas`* for alanning:meteor-roles, you need to add `svein:serrurier-cadenas-roles` to your project.
 > ```
 > meteor add svein:serrurier-cadenas-roles
@@ -154,7 +154,7 @@ Serrurier will first check if the astro instance has been persisted, then it wil
 ### Alanning meteor roles *`@cadenas`*
 
 > **⚠** This cadenas depends on `svein:serrurier-cadenas-defaults`, so it will be automatically imported if missing.  
-> **⚠** You need to use [alanning:meteor-roles](https://github.com/alanning/meteor-roles) in your project to use this one, and add the following package :
+> **⚠** You need to use [alanning:meteor-roles](https://github.com/alanning/meteor-roles) (v1 and v2 are supported) in your project to use this *`@cadenas`*, and add the following package :
 >```
 >meteor add svein:serrurier-cadenas-roles
 >```
@@ -174,7 +174,7 @@ Serrurier will first check if the astro instance has been persisted, then it wil
 // ...
 @cadenas( 'loggedUserInRole', 'responsible', parts.AUTO )
 // ...
-// parts.GLOBAL is the default value, it maps straight to Roles.GLOBAL_PARTITION
+// parts.GLOBAL is the default value, it maps straight to Roles.GLOBAL_PARTITION for roles v2, Roles.GLOBAL_GROUP for roles v1.X
 @cadenas( 'loggedUserInRole', 'responsible', parts.GLOBAL )
 > > ```
 
