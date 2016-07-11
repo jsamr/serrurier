@@ -150,7 +150,6 @@ describe('svein:serrurier', function() {
             const old = function () { throw thrown; };
             let MyClass;
             let createClass = once( function() {
-                console.info( 'CREATING CLASS DummyClass1' )
                 let astroClassCandidate = {
                     name: 'DummyClass1',
                     methods: {
