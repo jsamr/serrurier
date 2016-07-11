@@ -3,14 +3,14 @@
 
 # *Serrurier*, a declarative extension for methods access control in [jagi:astronomy](http://jagi.github.io/meteor-astronomy/)(v2) using decorators
 
-> ![](https://rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)
+> [![](https://rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)](#cadenas)
 >  
 > 
 > ![License](https://img.shields.io/github/license/mashape/apistatus.svg) [![CircleCI](https://circleci.com/gh/sveinburne/serrurier/tree/master.svg?style=shield)](https://circleci.com/gh/sveinburne/serrurier/tree/master)  
 
 > **ℹ** *Serrurier* and *cadenas* are french words that stands respectively for *locksmith* and *padlock*.  
 > **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators called *`@cadenas`*.  
-> **✔** It integrates smoothly with [alanning:meteor-roles](https://github.com/alanning/meteor-roles).  
+> **✔** [It integrates smoothly](#alanning-meteor-roles) with [alanning:meteor-roles](https://github.com/alanning/meteor-roles).  
 > **✔** Helps to abstract error management (user feedbacks, security reports) through [the flexible reporter API](#reporters).  
 > **✔** Allows to define [Astro methods that remote-call on server](#server).  
 > **✔** Works with synchronous and asynchronous (through Meteor methods api) methods.  
@@ -50,7 +50,7 @@ Table of Contents
   * [From scratch](#from-scratch)
 * [Run tests](#run-tests)
 
-
+<a name='cadenas'>
 ## &#x1f512; *`@cadenas`* decorator
 ### Basics
 
@@ -174,7 +174,8 @@ Serrurier will first check if the astro instance has been persisted, then it wil
 // ...
 @cadenas( 'loggedUserInRole', 'responsible', parts.AUTO )
 // ...
-// parts.GLOBAL is the default value, it maps straight to Roles.GLOBAL_PARTITION for roles v2, Roles.GLOBAL_GROUP for roles v1.X
+// parts.GLOBAL is the default value, it maps straight to Roles.GLOBAL_PARTITION for roles v2, 
+// Roles.GLOBAL_GROUP for roles v1.X
 @cadenas( 'loggedUserInRole', 'responsible', parts.GLOBAL )
 > > ```
 
@@ -286,7 +287,8 @@ if(Meteor.isProduction) Serrurier.lock();
 * @prop {!string} exceptionId       - Unique identifier of the exception
 * @prop {!string} stackTrace        - The stacktrace that generated this exception
 * @prop {!object} target            - The target of the action
-* @prop {object=} currentTarget     - The currentTarget of the action, i.e. a nested field of the target
+* @prop {object=} currentTarget     - The currentTarget of the action, i.e. a 
+* nested field of the target
 */
 ```
 
@@ -447,7 +449,8 @@ const myCustomCadenas = new DefaultCadenas({
     ExceptionClass: MyException
     doesAssertionFails: function( myArg ) {
         // Does it need to throw an exception ?
-        // Must NOT throw an error. Returns a non-empty string that will result in the // `reason` field for context when the assertion fails, a falsy value otherwise.
+        // Must NOT throw an error. Returns a non-empty string that will result in the 
+        // `reason` field for context when the assertion fails, a falsy value otherwise.
     },
     // The cadenas signature (i.e. `doesAssertionFails` signature)?
     // You must describe any parameter here to keep the API consistent.
