@@ -5,9 +5,11 @@
 
 > [![](https://rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)](#cadenas)
 >  
-> 
-> [![Join the chat at https://gitter.im/sveinburne/serrurier](https://badges.gitter.im/sveinburne/serrurier.svg)](https://gitter.im/sveinburne/serrurier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/sveinburne/serrurier/master/LICENSE) [![CircleCI](https://circleci.com/gh/sveinburne/serrurier/tree/master.svg?style=shield)](https://circleci.com/gh/sveinburne/serrurier/tree/master)  
-
+>
+> [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/sveinburne/serrurier/master/LICENSE) [![](https://img.shields.io/badge/versioning%20rules-semver-blue.svg?)](http://semver.org/) 
+[![CircleCI](https://circleci.com/gh/sveinburne/serrurier/tree/master.svg?style=shield)](https://circleci.com/gh/sveinburne/serrurier/tree/master)
+[![Join the chat at https://gitter.im/sveinburne/serrurier](https://badges.gitter.im/sveinburne/serrurier.svg)](https://gitter.im/sveinburne/serrurier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)    
+>
 > **ℹ** *Serrurier* and *cadenas* are french words that stands respectively for *locksmith* and *padlock*.  
 > **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators called *`@cadenas`*.  
 > **✔** [It integrates smoothly](#alanning-meteor-roles) with [alanning:roles](https://github.com/alanning/meteor-roles).  
@@ -174,7 +176,7 @@ Serrurier will first check if the astro instance has been persisted, then it wil
 // ...
 @cadenas( 'loggedUserInRole', 'responsible', parts.AUTO )
 // ...
-// parts.GLOBAL is the default value, it maps straight to Roles.GLOBAL_PARTITION for roles v2, 
+// parts.GLOBAL is the default value, it maps straight to Roles.GLOBAL_PARTITION for roles v2,
 // Roles.GLOBAL_GROUP for roles v1.X
 @cadenas( 'loggedUserInRole', 'responsible', parts.GLOBAL )
 > > ```
@@ -287,7 +289,7 @@ if(Meteor.isProduction) Serrurier.lock();
 * @prop {!string} exceptionId       - Unique identifier of the exception
 * @prop {!string} stackTrace        - The stacktrace that generated this exception
 * @prop {!object} target            - The target of the action
-* @prop {object=} currentTarget     - The currentTarget of the action, i.e. a 
+* @prop {object=} currentTarget     - The currentTarget of the action, i.e. a
 * nested field of the target
 */
 ```
@@ -449,7 +451,7 @@ const myCustomCadenas = new DefaultCadenas({
     ExceptionClass: MyException
     doesAssertionFails: function( myArg ) {
         // Does it need to throw an exception ?
-        // Must NOT throw an error. Returns a non-empty string that will result in the 
+        // Must NOT throw an error. Returns a non-empty string that will result in the
         // `reason` field for context when the assertion fails, a falsy value otherwise.
     },
     // The cadenas signature (i.e. `doesAssertionFails` signature)?
