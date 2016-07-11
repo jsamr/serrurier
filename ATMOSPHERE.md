@@ -8,7 +8,7 @@
 > 
 > **ℹ** *Serrurier* and *cadenas* are french words that stands respectively for *locksmith* and *padlock*.  
 > **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators called *`@cadenas`*.  
-> **✔** It integrates smoothly with [alanning:meteor-roles](https://github.com/alanning/meteor-roles).  
+> **✔** [It integrates smoothly](https://github.com/sveinburne/serrurier#alanning-meteor-roles) with [alanning:meteor-roles](https://github.com/alanning/meteor-roles).  
 > **✔** Helps to abstract error management (user feedbacks, security reports) through [the flexible reporter API](https://github.com/sveinburne/serrurier#reporters).  
 > **✔** Allows to define [Astro methods that remote-call on server](https://github.com/sveinburne/serrurier#server).  
 > **✔** Works with synchronous and asynchronous (through Meteor methods api) methods.  
