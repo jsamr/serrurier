@@ -6,11 +6,11 @@
 > [![](https://rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)](#cadenas)
 >  
 > 
-> ![License](https://img.shields.io/github/license/mashape/apistatus.svg) [![CircleCI](https://circleci.com/gh/sveinburne/serrurier/tree/master.svg?style=shield)](https://circleci.com/gh/sveinburne/serrurier/tree/master)  
+> [![Join the chat at https://gitter.im/sveinburne/serrurier](https://badges.gitter.im/sveinburne/serrurier.svg)](https://gitter.im/sveinburne/serrurier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/sveinburne/serrurier/master/LICENSE) [![CircleCI](https://circleci.com/gh/sveinburne/serrurier/tree/master.svg?style=shield)](https://circleci.com/gh/sveinburne/serrurier/tree/master)  
 
 > **ℹ** *Serrurier* and *cadenas* are french words that stands respectively for *locksmith* and *padlock*.  
 > **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators called *`@cadenas`*.  
-> **✔** [It integrates smoothly](#alanning-meteor-roles) with [alanning:meteor-roles](https://github.com/alanning/meteor-roles).  
+> **✔** [It integrates smoothly](#alanning-meteor-roles) with [alanning:roles](https://github.com/alanning/meteor-roles).  
 > **✔** Helps to abstract error management (user feedbacks, security reports) through [the flexible reporter API](#reporters).  
 > **✔** Allows to define [Astro methods that remote-call on server](#server).  
 > **✔** Works with synchronous and asynchronous (through Meteor methods api) methods.  
@@ -62,7 +62,7 @@ Table of Contents
 > **ℹ** *`@cadenas`* can target any `events` handlers but **not in an array of handlers**. On any `Error` thrown by a cadenas, `e.preventDefault()` will be called.  
 > **ℹ** It supports callbacks for `methods`.  
 > **ℹ** *Serrurier* is a very modular library and you can easely write your own *`@cadenas`* [within few lines of codes](#write-cadenas).   
-> **⚠** To use `loggedUserInRole` *`@cadenas`* for alanning:meteor-roles, you need to add `svein:serrurier-cadenas-roles` to your project.
+> **⚠** To use `loggedUserInRole` *`@cadenas`* for alanning:roles, you need to add `svein:serrurier-cadenas-roles` to your project.
 > ```
 > meteor add svein:serrurier-cadenas-roles
 > ```
@@ -154,7 +154,7 @@ Serrurier will first check if the astro instance has been persisted, then it wil
 ### Alanning meteor roles *`@cadenas`*
 
 > **⚠** This cadenas depends on `svein:serrurier-cadenas-defaults`, so it will be automatically imported if missing.  
-> **⚠** You need to use [alanning:meteor-roles](https://github.com/alanning/meteor-roles) (v1 and v2 are supported) in your project to use this *`@cadenas`*, and add the following package :
+> **⚠** You need to use [alanning:roles](https://github.com/alanning/meteor-roles) (v1 and v2 are supported) in your project to use this *`@cadenas`*, and add the following package :
 >```
 >meteor add svein:serrurier-cadenas-roles
 >```

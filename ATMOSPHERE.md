@@ -1,4 +1,4 @@
-![License](https://img.shields.io/github/license/mashape/apistatus.svg) [![CircleCI](https://circleci.com/gh/sveinburne/serrurier/tree/master.svg?style=shield)](https://circleci.com/gh/sveinburne/serrurier/tree/master)
+[![Join the chat at https://gitter.im/sveinburne/serrurier](https://badges.gitter.im/sveinburne/serrurier.svg)](https://gitter.im/sveinburne/serrurier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/sveinburne/serrurier/master/LICENSE) [![CircleCI](https://circleci.com/gh/sveinburne/serrurier/tree/master.svg?style=shield)](https://circleci.com/gh/sveinburne/serrurier/tree/master)  
 
 [![](https://cdn.rawgit.com/sveinburne/serrurier/master/img/serrurier-raw.svg)](https://github.com/sveinburne/serrurier#head)
 
