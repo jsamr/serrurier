@@ -4,6 +4,9 @@
 # *Serrurier*, a declarative extension for methods access control in [jagi:astronomy](http://jagi.github.io/meteor-astronomy/)(v2) using decorators
 
 > ![](https://rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)
+>  
+> 
+> ![License](https://img.shields.io/github/license/mashape/apistatus.svg) [![CircleCI](https://circleci.com/gh/sveinburne/serrurier/tree/master.svg?style=shield)](https://circleci.com/gh/sveinburne/serrurier/tree/master)  
 
 > **ℹ** *Serrurier* and *cadenas* are french words that stands respectively for *locksmith* and *padlock*.  
 > **✔** This library aims to write more secure, maintainable and readable code, by defining function access through decorators called *`@cadenas`*.  
@@ -12,7 +15,7 @@
 > **✔** Allows to define [Astro methods that run on server](#server).  
 > **✔** Works with synchronous and asynchronous (through Meteor methods api) methods.  
 > **✔** Compatible with [ValidationErrors](https://atmospherejs.com/mdg/validation-error#validationerror)  
-> **✔** ![](https://img.shields.io/github/license/mashape/apistatus.svg)  
+
 
 
 ``` bash
