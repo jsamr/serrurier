@@ -6,7 +6,7 @@
 > [![](https://rawgit.com/sveinburne/serrurier/master/img/decorator-raw.svg)](#cadenas)
 >  
 >
-> [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/sveinburne/serrurier/master/LICENSE) [![](https://img.shields.io/badge/versioning%20rules-semver-blue.svg?)](http://semver.org/) 
+> [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/sveinburne/serrurier/master/LICENSE) [![](https://img.shields.io/badge/versioning%20rules-semver-blue.svg?)](http://semver.org/)
 [![CircleCI](https://circleci.com/gh/sveinburne/serrurier/tree/master.svg?style=shield)](https://circleci.com/gh/sveinburne/serrurier/tree/master)
 [![Join the chat at https://gitter.im/sveinburne/serrurier](https://badges.gitter.im/sveinburne/serrurier.svg)](https://gitter.im/sveinburne/serrurier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)    
 >
@@ -469,11 +469,6 @@ const myCustomCadenas = new DefaultCadenas({
 
 Inside the *packages/serrurier* folder :
 
-**console**
 ```
 meteor npm test
-```
-**web**
-```
-meteor npm run-script test:practical
 ```
