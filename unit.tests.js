@@ -165,7 +165,6 @@ describe('svein:serrurier', function() {
             it( 'should receive the exception as first argument', function() {
                 (new MyClass()).someMethod1( function( err ) {
                     if(Meteor.isClient){
-                        console.info(err);
                         expect( err ).to.have.property( 'error' ).equal( 'SomeException.someDetails' );
                         expect( err ).to.have.property( 'reason' ).equal( null );
                     } else {
