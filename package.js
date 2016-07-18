@@ -7,7 +7,7 @@ var coreDependencies = [
 
 Package.describe({
     name: 'svein:serrurier',
-    version: '1.0.0',
+    version: '1.0.1',
     // Brief, one-line summary of the package.
     summary: 'A handy declarative extension for methods access control in jagi:astronomy with decorators ',
     // URL to the Git repository containing the source code for this package.
