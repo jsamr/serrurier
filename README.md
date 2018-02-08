@@ -1,5 +1,5 @@
 <a name="head">
-![](https://cdn.rawgit.com/sveinburne/serrurier/master/img/serrurier-raw.svg)
+![](https://cdn.rawgit.com/jsamr/serrurier/master/img/serrurier-raw.svg)
 
 # *Serrurier*, a declarative extension for methods access control in [jagi:astronomy](http://jagi.github.io/meteor-astronomy/)(v2) using decorators
 
@@ -53,7 +53,9 @@ Table of Contents
 * [Run tests](#run-tests)
 
 <a name='cadenas'>
+
 ## &#x1f512; *`@cadenas`* decorator
+ 
 ### Basics
 
 > **ℹ** A *`@cadenas`* is an assertion that will trigger a specific `Exception` when it fails.  
@@ -153,6 +155,7 @@ Serrurier will first check if the astro instance has been persisted, then it wil
 > **params** none
 
 <a name="alanning-meteor-roles">
+ 
 ### Alanning meteor roles *`@cadenas`*
 
 > **⚠** This cadenas depends on `svein:serrurier-cadenas-defaults`, so it will be automatically imported if missing.  
@@ -182,6 +185,7 @@ Serrurier will first check if the astro instance has been persisted, then it wil
 > > ```
 
 <a name='server'>
+ 
 ## *`@server`* decorator
 
 > ```
@@ -241,7 +245,9 @@ myClass.aMethodThatThrowsValidationError( function( err ) {
 
 
 <a name='decorators'>
+ 
 ## Adding legacy decorations (Meteor >= 1.3.4)
+
 Follow those two simple steps :
 
 > `meteor npm install -s babel-plugin-transform-decorators-legacy`
@@ -255,6 +261,7 @@ Then add at the root of your project a `.babelrc` file with the following conten
 }
 ```
 That's all you have to do!
+
 ## Security in production
 
 You can prevent `Serrurier` from outputting anything in the console, and lock the API with one single `Serrurier.lock()` at the beginning of your application.
@@ -270,6 +277,7 @@ if(Meteor.isProduction) Serrurier.lock();
 
 
 <a name="reporters">
+ 
 ## Reporters
 
 > **ℹ** A reporter is exactly like an event listener for errors.   
@@ -339,7 +347,9 @@ Serrurier.subscribeServerReporter( SecurityException );
 Suits nicely for Error logging and suspect activity logging, see the Paranoid reporter bellow.  
 
 <a name="paranoid-reporter">
+ 
 ### &#x1f47b; Paranoid reporter
+
 This reporter listen for `SecurityException`s on both client and server, and log detailed information **in the server** console.
 It also keep track of those reports for 2 months.
 
@@ -406,6 +416,7 @@ config({
 ```
 
 <a name="write-cadenas">
+ 
 ## Write your own *`@cadenas`*
 
 ### Composition with `Cadenas.partialFrom`
