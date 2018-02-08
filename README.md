@@ -1,4 +1,5 @@
 <a name="head">
+ 
 ![](https://cdn.rawgit.com/jsamr/serrurier/master/img/serrurier-raw.svg)
 
 # *Serrurier*, a declarative extension for methods access control in [jagi:astronomy](http://jagi.github.io/meteor-astronomy/)(v2) using decorators
